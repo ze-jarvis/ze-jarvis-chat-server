@@ -2,6 +2,7 @@
 
 var express = require('express')
 var morgan = require('morgan')
+var cors = require('cors')
 var bodyParser = require('body-parser')
 
 //
@@ -19,6 +20,8 @@ function zeJarvisChatServer (initialDB, options) {
   if (options.verbose) {
     app.use(morgan('dev'))
   }
+
+  app.use(cors())
 
   app.get('/messages', function (req, res) {
     res.json(db.map(function (value, id) {
