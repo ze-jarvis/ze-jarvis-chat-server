@@ -22,6 +22,7 @@ function zeJarvisChatServer (initialDB, options) {
   }
 
   app.use(cors())
+  app.use(bodyParser.json())
 
   app.get('/messages', function (req, res) {
     res.json(db.map(function (value, id) {
@@ -31,7 +32,7 @@ function zeJarvisChatServer (initialDB, options) {
     }))
   })
 
-  app.post('/messages', bodyParser.json(), function (req, res) {
+  app.post('/messages', function (req, res) {
     var newEntry = req.body
     db.unshift(newEntry)
     res
